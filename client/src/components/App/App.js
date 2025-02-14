@@ -10,6 +10,7 @@ import ProjectList from '../ProjectList'
 import ProjectForm from '../ProjectForm/ProjectForm'
 import TaskList from '../TaskList'
 import TaskForm from '../TaskForm'
+import TaskComments from '../TaskComments'
 import TaskDetails from '../TaskDetails'
 import Dashboard from '../Dashboard'
 
@@ -17,6 +18,7 @@ import UserStore from '../../state/stores/UserStore'
 import ProjectStore from '../../state/stores/ProjectStore'
 import TaskStore from '../../state/stores/TaskStore'
 import UserSuggestionStore from '../../state/stores/UserSuggestionStore'
+import CommentStore from '../../state/stores/CommentStore'
 import ErrorDisplay from '../ErrorDisplay'
 
 const App = () => {
@@ -25,6 +27,7 @@ const App = () => {
   const [projectStore] = useState(new ProjectStore())
   const [taskStore] = useState(new TaskStore())
   const [userSuggestionStore] = useState(new UserSuggestionStore())
+  const [commentStore] = useState(new CommentStore())
 
   useEffect(() => {
     userStore.emitter.addListener('LOGIN_SUCCESS', () => {
@@ -37,7 +40,8 @@ const App = () => {
       user: userStore,
       project: projectStore,
       task: taskStore,
-      userSuggestion: userSuggestionStore
+      userSuggestion: userSuggestionStore,
+      comment: commentStore
     }}
     >
       {
@@ -101,6 +105,13 @@ const App = () => {
             path='/projects/:pid/tasks/:tid' element={
               <AuthGuard isAuthenticated={isAuthenticated}>
                 <TaskDetails />
+              </AuthGuard>
+          }
+          />
+          <Route
+            path='/projects/:pid/tasks/:tid/comments' element={
+              <AuthGuard isAuthenticated={isAuthenticated}>
+                <TaskComments />
               </AuthGuard>
           }
           />

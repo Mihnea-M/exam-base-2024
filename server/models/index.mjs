@@ -3,6 +3,7 @@ import createProjectEntity from './project.mjs'
 import createTaskEntity from './task.mjs'
 import createUserEntity from './user.mjs'
 import createPermissionEntity from './permission.mjs'
+import createCommentEntity from './comment.mjs'
 
 const sequelize = new Sequelize({
   dialect: 'sqlite',
@@ -14,6 +15,7 @@ const Project = createProjectEntity(sequelize, Sequelize)
 const Task = createTaskEntity(sequelize, Sequelize)
 const User = createUserEntity(sequelize, Sequelize)
 const Permission = createPermissionEntity(sequelize, Sequelize)
+const Comment = createCommentEntity(sequelize, Sequelize)
 
 User.hasMany(Project)
 Project.belongsTo(User)
@@ -33,6 +35,12 @@ Task.hasOne(Permission, {
 Task.belongsTo(User, { as: 'assignedTo' })
 User.hasOne(Task)
 
+Task.hasMany(Comment, {foreignKey: 'taskId', as: 'comments'})
+Comment.belongsTo(Task, {foreignKey: 'taskId', as: 'task'})
+
+User.hasMany(Comment, {foreignKey: 'userId', as: 'comments'})
+Comment.belongsTo(User, {foreignKey: 'userId', as: 'user'})
+
 try {
   await sequelize.sync({
     alter: true
@@ -46,5 +54,6 @@ export default {
   Permission,
   Project,
   Task,
-  User
+  User, 
+  Comment
 }

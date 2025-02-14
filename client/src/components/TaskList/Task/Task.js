@@ -61,6 +61,11 @@ const Task = ({ task }) => {
                       }}
                       >Details
                       </button>
+                      <button onClick={() => {
+                        navigate(`/projects/${params.pid}/tasks/${task.id}/comments`)
+                      }}
+                      >Comments
+                      </button>
                     </td>
                   </>
                   )

@@ -145,6 +145,7 @@ class TaskStore {
       this.emitter.emit('UPDATE_STATUS_ERROR')
     }
   }
+
 }
 
 export default TaskStore
