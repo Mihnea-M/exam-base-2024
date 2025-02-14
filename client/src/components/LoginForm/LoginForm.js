@@ -18,7 +18,7 @@ const LoginForm = () => {
   useEffect(() => {
     user.emitter.addListener('LOGIN_SUCCESS', () => {
       setIsAuthenticated(true)
-      navigate(location.state.from)
+      navigate("/")
     })
   }, [])
 
@@ -39,6 +39,7 @@ const LoginForm = () => {
           onChange={e => setPassword(e.target.value)}
         />
         <button onClick={handleLoginClick}>Login</button>
+        <button onClick={() => navigate('/register')}>Register</button>
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import AppContext from '../../state/AppContext'
 
 import AuthGuard from '../AuthGuard'
 import LoginForm from '../LoginForm'
+import RegisterForm from '../RegisterForm'
 import ProjectList from '../ProjectList'
 import ProjectForm from '../ProjectForm/ProjectForm'
 import TaskList from '../TaskList'
@@ -60,6 +61,7 @@ const App = () => {
       <Router>
         <Routes>
           <Route path='/login' element={<LoginForm />} />
+          <Route path='/register' element={<RegisterForm />} />
           <Route
             path='/' element={
               <AuthGuard isAuthenticated={isAuthenticated}>

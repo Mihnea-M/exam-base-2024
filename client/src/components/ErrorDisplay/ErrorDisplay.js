@@ -11,6 +11,9 @@ const ErrorDisplay = () => {
     globalState.user.emitter.addListener('LOGIN_ERROR', () => {
       setMessage('LOGIN_ERROR')
     })
+    globalState.user.emitter.addListener('REGISTER_ERROR', () => {
+      setMessage('REGISTER_ERROR')
+    })
     globalState.user.emitter.addListener('LOGOUT_ERROR', () => {
       setMessage('LOGOUT_ERROR')
     })
